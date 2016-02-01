@@ -35,34 +35,44 @@ while($line = <INFILE>) {
 
 	# YOUR CODE BELOW...
 	# Step 1, remove the extra strings before and between the song title
-	my $s = $line =~ /\%([A-Z0-9]*)(\<[SEP]+\>)([A-Z0-9]*)(\<[SEP]+\>)(.*)(\<[SEP]+\>)(.*)/;
+		#each part of the string
+		my $s = $line =~ /\%([A-Z0-9]*)(\<[SEP]+\>)([A-Z0-9]*)(\<[SEP]+\>)(.*)(\<[SEP]+\>)(.*)/;
 		print "\n";
 		
-		#my $d = $line =~ s/$1$2$3$4$5$6//g;
-		my ($b) = ($7);
-		$title = $b;
-		
+		#delete every unneeded part of the string
+		$line =~ s/\%$1$2$3$4$5$6//g;
+		#rename line to title
+		$title = $line;
 		print $title, "\n";
-		
-	#So far, all I'm doing is printing the song title, need to delete everything else because
-	# it interferes with some steps below.	
-		
-		
+	
 	# Step 2 and 3, remove punctuation and symbols
 
 	foreach("\n", $title){
 		#this works! Gets rid of symbols	
-		my $s1 = $title =~ s/([¿?¡!.&\$#@\%|])+//g;
+		$title =~ s/([¿?¡!.&\$#@\%|])+//g;
 		
 		#Working and experimenting here, not sure how to get rid of everything between the (),etc.
+		#$title =~ s/([\[\({\-_\+*;:`\\\/])+//;
 		
-		#my $s2 = $title =~ s/([\[\({\-_\+*;:`\\\/])+//g;
-		my $s3 = $title =~ /(.*)(\([a-z0-9]+\))/;
-		my ($a, $b) = ($1, $2);
-	
+		#testing with this, it will delete the / but nothing after
+		#Not sure why it's printing so much!
+		$title =~ s/(\/(^*))+//g;
+		
+		$newTitle = $title;
 		
 		print $newTitle;
 	}
+
+
+
+
+
+	# Step 4
+
+	# Step 5, convert to lowercase
+	$lowerCase = lc $title;
+	print $lowerCase;
+	
 	
 }
 
