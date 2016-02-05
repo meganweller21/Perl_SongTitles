@@ -29,12 +29,9 @@ while($line = <INFILE>) {
 
 	# YOUR CODE BELOW...
 	# Step 1, remove the extra strings before and between the song title
-
-		my $s = $line =~ /\%([A-Z0-9]*)(\<[SEP]+\>)([A-Z0-9]*)(\<[SEP]+\>)(.*)(\<[SEP]+\>)(.*)/;
-		print "\n";
-		
 		#delete every unneeded part of the string
-		$line =~ s/\%$1$2$3$4$5$6//g;
+		$line =~ s/\%([A-Z0-9]*)(\<[SEP]+\>)([A-Z0-9]*)(\<[SEP]+\>)(.*)(\<[SEP]+\>)//g;
+		
 		#rename line to title
 		$title = $line;
 	
@@ -58,6 +55,7 @@ while($line = <INFILE>) {
 		$title =~ s/(\((.*)\))+//g;
 		$title =~ s/(\()+//g;
 		$title =~ s/(\[(.*)\])+//g;
+		$title =~ s/(\[)+//g;
 		$title =~ s/(\{(.*)\})+//g;
 
 	# Step 5, convert to lowercase
