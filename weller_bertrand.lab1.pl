@@ -29,44 +29,47 @@ while($line = <INFILE>) {
 
 	# YOUR CODE BELOW...
 	# Step 1, remove the extra strings before and between the song title
-		#delete every unneeded part of the string
-		$line =~ s/\%([A-Z0-9]*)(\<[SEP]+\>)([A-Z0-9]*)(\<[SEP]+\>)(.*)(\<[SEP]+\>)//g;
+	#delete every unneeded part of the string
+	$line =~ s/\%([A-Z0-9]*)(\<[SEP]+\>)([A-Z0-9]*)(\<[SEP]+\>)(.*)(\<[SEP]+\>)//g;
 		
-		#rename line to title
-		$title = $line;
+	#rename line to title
+	$title = $line;
 	
 	# Step 2 and 3, remove punctuation and symbols
 
-		#Gets rid of symbols	
-		$title =~ s/([¿?¡!.&\$#@\%|])+//g;
+	#Gets rid of symbols	
+	$title =~ s/([¿?¡!.&\$#@\%|])+//g;
 
-		#( { \ / -: "‘+=*feat.
-		$title =~ s/(\/(.*))+//g;
-		$title =~ s/(\\(.*))+//g;
-		$title =~ s/(\-(.*))+//g;
-		$title =~ s/(_(.*))+//g;
-		$title =~ s/(\:(.*))+//g;
-		$title =~ s/(\"(.*))+//g;
-		$title =~ s/(\`(.*))+//g;
-		$title =~ s/(\+(.*))+//g;
-		$title =~ s/(\=(.*))+//g;
-		$title =~ s/(\*(.*))+//g;
-		$title =~ s/(feat.)+//g;
-		$title =~ s/(\((.*)\))+//g;
-		$title =~ s/(\()+//g;
-		$title =~ s/(\[(.*)\])+//g;
-		$title =~ s/(\[)+//g;
-		$title =~ s/(\{(.*)\})+//g;
+	#( { \ / -: "‘+=*feat.
+	$title =~ s/(\/(.*))+//g;
+	$title =~ s/(\\(.*))+//g;
+	$title =~ s/(\-(.*))+//g;
+	$title =~ s/(_(.*))+//g;
+	$title =~ s/(\:(.*))+//g;
+	$title =~ s/(\"(.*))+//g;
+	$title =~ s/(\`(.*))+//g;
+	$title =~ s/(\+(.*))+//g;
+	$title =~ s/(\=(.*))+//g;
+	$title =~ s/(\*(.*))+//g;
+	$title =~ s/(feat.)+//g;
+	$title =~ s/(\((.*)\))+//g;
+	$title =~ s/(\()+//g;
+	$title =~ s/(\[(.*)\])+//g;
+	$title =~ s/(\[)+//g;
+	$title =~ s/(\{(.*)\})+//g;
 
 	# Step 5, convert to lowercase
 	$newTitle = lc $title;
 
 	# Step 4
 	foreach($title){
-
 		print $newTitle unless /[^[:ascii:]]/;
 	}
-	
+
+	#Split title into individual words
+	#Each word is an element of @array
+	my @array = split(' ', $newTitle);
+	print("$_\n") for (@array);
 }
 
 # Close the file handle
