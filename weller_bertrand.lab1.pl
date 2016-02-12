@@ -6,11 +6,13 @@
 #  Ashley Bertrand								
 #########################################
 
+#use strict;
+#use warnings;
+
 # Replace the string value of the following variable with your names.
 my $name = "Megan Weller";
 my $partner = "Ashley Bertrand";
 print "CSCI 305 Lab 1 submitted by $name and $partner.\n\n";
-
 
 # Checks for the argument, fail if none given
 if($#ARGV != 0) {
@@ -21,56 +23,93 @@ if($#ARGV != 0) {
 # Opens the file and assign it to handle INFILE
 open(INFILE, $ARGV[0]) or die "Cannot open $ARGV[0]: $!.\n";
 
-
 # YOUR VARIABLE DEFINITIONS HERE...
+my $numValid = 0;
 
 # This loops through each line of the file
 while($line = <INFILE>) {
 
-	# YOUR CODE BELOW...
 	# Step 1, remove the extra strings before and between the song title
 	#delete every unneeded part of the string
 	$line =~ s/\%([A-Z0-9]*)(\<[SEP]+\>)([A-Z0-9]*)(\<[SEP]+\>)(.*)(\<[SEP]+\>)//g;
-		
+
 	#rename line to title
 	$title = $line;
 	
-	# Step 2 and 3, remove punctuation and symbols
+	# Setp 2, eliminate all text following these symbols
+	$title =~ s/(\[(.*))+//g;			#[
+	$title =~ s/(\((.*))+//g;			#(
+	$title =~ s/(\{(.*))+//g;			#{
+	$title =~ s/(\\(.*))+//g;			#\
+	$title =~ s/(\/(.*))+//g;			#/
+	$title =~ s/(\_(.*))+//g;			#_
+	$title =~ s/(\-(.*))+//g;			#-
+	$title =~ s/(\:(.*))+//g;			#:
+	$title =~ s/(\"(.*))+//g;			#"
+	$title =~ s/(\`(.*))+//g;			#`
+	$title =~ s/(\+(.*))+//g;			#+
+	$title =~ s/(\=(.*))+//g;			#=
+	$title =~ s/(\*(.*))+//g;			#*
+	$title =~ s/(feat.(.*))+//g;		#feat.	
 
-	#Gets rid of symbols	
-	$title =~ s/([¿?¡!.&\$#@\%|])+//g;
+	# Step 3, eliminate punctuation
+	$title =~ s/([?¿!¡.;&\$@\%#|])+//g;
 
-	#( { \ / -: "‘+=*feat.
-	$title =~ s/(\/(.*))+//g;
-	$title =~ s/(\\(.*))+//g;
-	$title =~ s/(\-(.*))+//g;
-	$title =~ s/(_(.*))+//g;
-	$title =~ s/(\:(.*))+//g;
-	$title =~ s/(\"(.*))+//g;
-	$title =~ s/(\`(.*))+//g;
-	$title =~ s/(\+(.*))+//g;
-	$title =~ s/(\=(.*))+//g;
-	$title =~ s/(\*(.*))+//g;
-	$title =~ s/(feat.)+//g;
-	$title =~ s/(\((.*)\))+//g;
-	$title =~ s/(\()+//g;
-	$title =~ s/(\[(.*)\])+//g;
-	$title =~ s/(\[)+//g;
-	$title =~ s/(\{(.*)\})+//g;
-
-	# Step 5, convert to lowercase
-	$newTitle = lc $title;
-
-	# Step 4
-	foreach($title){
-		print $newTitle unless /[^[:ascii:]]/;
+	# Step 4, filter out non-English characters
+	if ($title =~ /[^[:ascii:]]/) {
+		#print("invalid: $title\n");
+		$title = "";
+	} else {
+		#print("valid: $title\n");
+		$numValid = $numValid + 1;
 	}
 
+	# Step 5, convert to lowercase
+	$title = lc $title;
+
 	#Split title into individual words
-	#Each word is an element of @array
-	my @array = split(' ', $newTitle);
-	print("$_\n") for (@array);
+	#Each word is an element of @words
+	my @words = split(' ', $title);
+	#print("$_\n") for (@words);
+
+	#scalar: $ - number, string, reference
+	#array: @ - list of scalars
+	#hash: % - sets of key/value pairs
+
+	#putting each word into a indices of a hash
+	my %currentHash = @words;
+
+	my $currentHash = %currentHash[$i];
+	my $a;
+	my $b;
+
+#=pod
+	#<=> makes it so keys are treated as numbers,
+	#keys get sorted numerically
+	foreach my $nextWord(sort {$currentHash{$b}<=>$currentHash{$a}}keys %currentHash) {
+		#print("nextWord: $nextWord\n");
+		#print("currentHash: $currentHash{$b}\n");
+
+		if(! %currentHash) {
+			print("in first if statement");
+	  		return "";
+	 	}
+
+	 	if($frequencies[0]>$frequencies[1]) {
+	 		print("in second if statement: $words[0]");
+	  		return $words[0];
+	 	}
+
+	  	else {
+	  		#print("else\n");
+	  	}
+	}
+#=cut
+
+	
 }
+
+print("\n\nThere are $numValid valid lines.\n");
 
 # Close the file handle
 close INFILE; 
