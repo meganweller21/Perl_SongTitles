@@ -6,8 +6,7 @@
 #  Ashley Bertrand								
 #########################################
 
-#use strict;
-#use warnings;
+use Data::Dumper;
 
 # Replace the string value of the following variable with your names.
 my $name = "Megan Weller";
@@ -25,6 +24,7 @@ open(INFILE, $ARGV[0]) or die "Cannot open $ARGV[0]: $!.\n";
 
 # YOUR VARIABLE DEFINITIONS HERE...
 my $numValid = 0;
+my $titles;
 
 # This loops through each line of the file
 while($line = <INFILE>) {
@@ -67,46 +67,68 @@ while($line = <INFILE>) {
 	# Step 5, convert to lowercase
 	$title = lc $title;
 
-	#Split title into individual words
-	#Each word is an element of @words
-	my @words = split(' ', $title);
-	#print("$_\n") for (@words);
+	#making a titles array where each index is a title
+	@titles[numValid] = $title;
+	#print("title: $titles[numValid]");
 
-	#scalar: $ - number, string, reference
-	#array: @ - list of scalars
-	#hash: % - sets of key/value pairs
+	#splitting each title into words
+	my @words = split ' ', $titles[numValid];
+	#foreach $word (@words) {
+	#	print("word: $word\n");
+	#}
 
-	#putting each word into a indices of a hash
-	my %currentHash = @words;
+	my @keys;
+	my @values;
+	my %hash;
+	my $i = 0;
 
-	my $currentHash = %currentHash[$i];
-	my $a;
-	my $b;
+	for($index=0; $index <= $#words - 1; $index++){
+
+		#array to hold keys
+    	@keys[i] = $words[$index];
+
+    	#array to hold values
+    	@values[i] = $words[$index + 1];
+
+    	#print("key: @keys[i], value: @values[i]\n");
+
+    	#for($j=0; $j <= $#keys; $j++) {
+		#	print("key: $keys[j], ");
+		#}
+
+		#for($j=0; $j <= $#values; $j++) {
+		#	print("value: $values[j]\n");
+		#}
+
+		#hash of keys and values
+		@hash{@keys} = @values;
+
+    	$i = $i + 1;
+	}
+
+	
 
 #=pod
 	#<=> makes it so keys are treated as numbers,
 	#keys get sorted numerically
-	foreach my $nextWord(sort {$currentHash{$b}<=>$currentHash{$a}}keys %currentHash) {
-		#print("nextWord: $nextWord\n");
-		#print("currentHash: $currentHash{$b}\n");
+	foreach my $key(sort {$hash{$b}<=>$hash{$a}}keys %hash) {
+		printf "$key\t$hash{$key}\n";
 
-		if(! %currentHash) {
+		if(! %hash) {
 			print("in first if statement");
 	  		return "";
 	 	}
 
-	 	if($frequencies[0]>$frequencies[1]) {
+	 	if($frequencyHash[0]>$frequencyHash[1]) {
 	 		print("in second if statement: $words[0]");
 	  		return $words[0];
 	 	}
 
 	  	else {
-	  		#print("else\n");
+
 	  	}
 	}
 #=cut
-
-	
 }
 
 print("\n\nThere are $numValid valid lines.\n");
