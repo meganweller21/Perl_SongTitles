@@ -122,7 +122,7 @@ sub mcw {
     my ($key) = @_;
 
     #if argument is not a key
-    return "$key is not a key" unless exists $hash{$key};
+    return "\n" unless exists $hash{$key};
 
     my $value = $hash{$key};
 
@@ -140,8 +140,18 @@ sub mcw {
 #print mcw("computer");
 
 sub build_song_title {
-
+	my $numWords = 0;
+	my $songTitle = "";
+	my ($word) = @_;
+	#while ($numWords < 20 or $word eq "\n") {
+	#	$word = mcw($word);
+	#	$songTitle += $word;
+	#	$numWords += 1;
+	#}
+	return $songTitle;
 }
+
+print build_song_title("all");
 
 # User control loop
 #print "Enter a word [Enter 'q' to quit]: ";
@@ -150,7 +160,6 @@ sub build_song_title {
 #print "\n";	
 #while ($input ne "q"){
 	# Replace these lines with some useful code
-#	print "Not yet implemented.  Goodbye.\n";
 #	$input = 'q';
 #}
 
