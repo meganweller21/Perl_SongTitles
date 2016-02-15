@@ -6,6 +6,10 @@
 #  Ashley Bertrand								
 #########################################
 
+#use strict;
+#use warnings;
+use List::Util qw(reduce);
+
 # Replace the string value of the following variable with your names.
 my $name = "Megan Weller";
 my $partner = "Ashley Bertrand";
@@ -94,34 +98,12 @@ while($line = <INFILE>) {
 
 		$i = $i + 1;
 	}
-
-=pod
-	#<=> makes it so keys are treated as numbers,
-	#keys get sorted numerically
-	foreach my $key(sort {$hash{$b}<=>$hash{$a}}keys %hash) {
-		#printf "$key\t$hash{$key}\n";
-
-		if(! %hash) {
-			print("in first if statement");
-	  		return "";
-	 	}
-
-	 	if($frequencyHash[0]>$frequencyHash[1]) {
-	 		print("in second if statement: $words[0]");
-	  		return $words[0];
-	 	}
-
-	  	else {
-
-	  	}
-	}
-=cut
 }
 
 #print key : value = count
 foreach my $key (sort keys %hash) {
    	while (my ($value, $count) = each %{$hash{$key}}) {
-    	print "$key : $value = $count\n";
+    	#print "$key : $value = $count\n";
    	}
 }
 
@@ -130,24 +112,36 @@ print("\nThere are $numValid valid lines.\n");
 # Close the file handle
 close INFILE; 
 
-# At this point (hopefully) you will have finished processing the song 
-# title file and have populated your data structure of bigram counts.
+# Finished processing the song 
+# Data structure is populated with bigram counts.
 print "\nFile parsed. Bigram model built.\n\n";
 
 #returns the word that most commonly follows the given argument
-sub function() {
-	$key = $_[0];
-	if(exists($hash{$key})) {
-		while (my ($value, $count) = each %{$hash{$key}}) {
-			#doesn't work
-   		}
+sub mcw {
+	#setting $key to argument
+    my ($key) = @_;
 
-	} else {
-		return "$key does not exist";
-	}
+    #if argument is not a key
+    return "$key is not a key" unless exists $hash{$key};
+
+    my $value = $hash{$key};
+
+    #returning value of key with highest count
+    return reduce { $value->{$a} > $value->{$b} ? $a : $b } keys %$value;
 }
 
-print &mcw("all");
+#Question 1
+#print mcw("happy");
+
+#Question 2
+#print mcw("sad");
+
+#Question 4
+#print mcw("computer");
+
+sub build_song_title {
+
+}
 
 # User control loop
 #print "Enter a word [Enter 'q' to quit]: ";
