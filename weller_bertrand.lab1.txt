@@ -1,51 +1,60 @@
 Ashley Bertrand and Megan Weller
 Lab Questions
 
-1. day
+1. birthday
 
 2. song
 
-3. 
+3. 58
 
-4. algebra
+4. love
 
-5. 
+5. 13
 
-6. happy day at all over you want you want you want you want you want you want you want you
+6. happy birthday song you are you are you are you are you are you are you are you are you
 
-7. sad song is my heart is my heart is my heart is my heart is my heart is my heart
+7. sad song you are you are you are you are you are you are you are you are you are
 
-8. hey my heart is my heart is my heart is my heart is my heart is my heart is my
+8. hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey hey
 
-9. little bit more time i love you want you want you want you want you want you want you want
+9. little girl like you are you are you are you are you are you are you are you are you
 
 10. amore mio babbino caro gianni schicchi
 
-11. love you want you want you want you want you want you want you want you want you want you
+11. love you are you are you are you are you are you are you are you are you are you
 
-12. 
+12. One way to partially solve this problem is to filter out additional words as stop words.  I 
+chose to filter out "you" because it is the first word of the repeating chain.  The chain is 
+created because "you" is most commonly followed by "are" which is most commonly followed by "you".  
+I re-ran the revised program on questions 6, 7, and 9, and saw the original repeated phrase no 
+longer existed.  However, there is a new repeated phrase "is my heart" which starts by following 
+"song" or "love".  Filtering out "is" would eliminate the new repeated phrase, but this would 
+likely just lead to a new repeated phrase, and this process would continue.  Another strategy 
+would be to filter out "song", "like", or "love" initially because they are the words that lead 
+to the repeating chains.
 
-13. 
+13. montana sacra nova scotia
 
-14. 
+14. bob marley me down road blues night long way i love is my heart is my heart is my heart
 
-15. 
+15. moon river blues night long way i love is my heart is my heart is my heart is my heart
 
-16. I like how easy print statements are to use and implement.  You don't need to 
-use '+' or '{0}' with listed arguments like in other languages.
+16. I like how easy print statements are to use and implement.  You don't need to use '+' or '{0}' 
+with listed arguments like in other languages.
 
-17. I don't like the syntax for subroutines.  The keyword 'sub' seems nonessential, 
-yet it is required.  Also, from the function header, you cannot tell what it returns 
-or what types of arguments the subroutine takes.  This then makes it difficult to 
-access the arguments.
+17. I don't like the syntax for subroutines.  The keyword 'sub' seems non-essential for the 
+structure, yet it is required.  Also, from the function header, you cannot tell what it returns 
+or what types of arguments the subroutine takes.  This then makes it difficult to access the 
+arguments.
 
-18. This lab was very complex and had many steps, though I do see its application.  
-I enjoyed experimenting with regular expressions and seeing how I could manipulate 
-strings.  I found the most difficult part was implementing the bigram data structure. 
+18. This lab was very complex and had many steps, though I do see its application.  I enjoyed 
+experimenting with regular expressions and seeing how I could manipulate strings.  I found the 
+most difficult part was implementing the bigram data structure. 
 
 19. Ashley - 16 hours; Megan - 
 
-20. I see a few distinct problems (ie. string manipulations using regular 
-expressions) that Perl would be a good choice for a language.  However, I 
-see greater advantages in other languages, which I have found to have greater 
-readability, and would therefore be more likely to use depending on the project.
+20. I see a few distinct problems (ie. string manipulations using regular expressions) that 
+Perl would be a good choice for a language.  However, I see greater advantages in other 
+languages, which I have found to have greater readability, and would therefore be more likely to 
+use depending on the project.  After completing this lab, I feel much more confident in my ability 
+to program in Perl and also write code in a language that I have never worked with before.
