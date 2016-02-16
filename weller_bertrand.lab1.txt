@@ -2,22 +2,50 @@ Ashley Bertrand and Megan Weller
 Lab Questions
 
 1. day
+
 2. song
+
 3. 
+
 4. algebra
+
 5. 
-6. 
-7. 
-8. 
-9. 
-10. 
-11. 
+
+6. happy day at all over you want you want you want you want you want you want you want you
+
+7. sad song is my heart is my heart is my heart is my heart is my heart is my heart
+
+8. hey my heart is my heart is my heart is my heart is my heart is my heart is my
+
+9. little bit more time i love you want you want you want you want you want you want you want
+
+10. amore mio babbino caro gianni schicchi
+
+11. love you want you want you want you want you want you want you want you want you want you
+
 12. 
+
 13. 
+
 14. 
+
 15. 
-16. 
-17. 
-18. 
-19. 
-20. 
+
+16. I like how easy print statements are to use and implement.  You don't need to 
+use '+' or '{0}' with listed arguments like in other languages.
+
+17. I don't like the syntax for subroutines.  The keyword 'sub' seems nonessential, 
+yet it is required.  Also, from the function header, you cannot tell what it returns 
+or what types of arguments the subroutine takes.  This then makes it difficult to 
+access the arguments.
+
+18. This lab was very complex and had many steps, though I do see its application.  
+I enjoyed experimenting with regular expressions and seeing how I could manipulate 
+strings.  I found the most difficult part was implementing the bigram data structure. 
+
+19. Ashley - 16 hours; Megan - 
+
+20. I see a few distinct problems (ie. string manipulations using regular 
+expressions) that Perl would be a good choice for a language.  However, I 
+see greater advantages in other languages, which I have found to have greater 
+readability, and would therefore be more likely to use depending on the project.
