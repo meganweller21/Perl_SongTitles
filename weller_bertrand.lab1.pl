@@ -109,12 +109,35 @@ foreach my $key (sort keys %hash) {
 
 print("\nThere are $numValid valid lines.\n");
 
+
+
+
+
 # Close the file handle
 close INFILE; 
 
 # Finished processing the song 
 # Data structure is populated with bigram counts.
 print "\nFile parsed. Bigram model built.\n\n";
+
+
+# User control loop
+#print "Enter a word [Enter 'q' to quit]: ";
+#$input = <STDIN>;
+#chomp($input);
+#print "\n";	
+#while ($input ne "q"){
+	# Replace these lines with some useful code
+
+#	my $line = build_song_title($input);
+
+#	print $line;
+
+#}
+
+# MORE OF YOUR CODE HERE....
+
+
 
 #returns the word that most commonly follows the given argument
 sub mcw {
@@ -138,29 +161,20 @@ sub mcw {
 
 #Question 4
 #print mcw("computer");
-
+print build_song_title("all");
 sub build_song_title {
 	my $numWords = 0;
 	my $songTitle = "";
 	my ($word) = @_;
-	#while ($numWords < 20 or $word eq "\n") {
-	#	$word = mcw($word);
-	#	$songTitle += $word;
-	#	$numWords += 1;
-	#}
+	while ($numWords < 20 or $word eq "\n"){
+		print("hi");
+		#we're stuck in an endless loop here
+		$word = mcw($word);
+		$songTitle += $word;
+		$numWords += 1;
+	}
 	return $songTitle;
 }
 
-print build_song_title("all");
 
-# User control loop
-#print "Enter a word [Enter 'q' to quit]: ";
-#$input = <STDIN>;
-#chomp($input);
-#print "\n";	
-#while ($input ne "q"){
-	# Replace these lines with some useful code
-#	$input = 'q';
-#}
 
-# MORE OF YOUR CODE HERE....
