@@ -122,18 +122,23 @@ print "\nFile parsed. Bigram model built.\n\n";
 
 
 # User control loop
-#print "Enter a word [Enter 'q' to quit]: ";
-#$input = <STDIN>;
-#chomp($input);
-#print "\n";	
-#while ($input ne "q"){
+print "Enter a word [Enter 'q' to quit]: ";
+$input = <STDIN>;
+chomp($input);
+print "\n";	
+while ($input ne "q"){
 	# Replace these lines with some useful code
 
-#	my $line = build_song_title($input);
+	my $line = build_song_title($input);
 
-#	print $line;
+	print "\n", $line;
+	
+	print "\nEnter a word [Enter 'q' to quit]: ";
+	$input = <STDIN>;
+	chomp($input);
+	
 
-#}
+}
 
 # MORE OF YOUR CODE HERE....
 
@@ -160,19 +165,20 @@ sub mcw {
 #print mcw("sad");
 
 #Question 4
-#print mcw("computer");
-print build_song_title("all");
+print mcw("computer");
+
 sub build_song_title {
 	my $numWords = 0;
 	my $songTitle = "";
 	my ($word) = @_;
-	while ($numWords < 20 or $word eq "\n"){
-		print("hi");
-		#we're stuck in an endless loop here
+
+	while ($numWords <= 20){
+		$songTitle .= $word;
+		$songTitle .= " ";
 		$word = mcw($word);
-		$songTitle += $word;
 		$numWords += 1;
 	}
+	
 	return $songTitle;
 }
 
