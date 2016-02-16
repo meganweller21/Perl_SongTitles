@@ -24,7 +24,7 @@ if($#ARGV != 0) {
 # Opens the file and assign it to handle INFILE
 open(INFILE, $ARGV[0]) or die "Cannot open $ARGV[0]: $!.\n";
 
-# YOUR VARIABLE DEFINITIONS HERE...
+# Variable definitions
 my $numValid = 0;
 my $titles;
 my %hash;
@@ -35,13 +35,13 @@ my @values;
 while($line = <INFILE>) {
 
 	# Step 1, remove the extra strings before and between the song title
-	#delete every unneeded part of the string
-	$line =~ s/\%([A-Z0-9]*)(\<[SEP]+\>)([A-Z0-9]*)(\<[SEP]+\>)(.*)(\<[SEP]+\>)//g;
+	# delete every unneeded part of the string
+	$line =~ s/([A-Z0-9]*)(\<[SEP]+\>)([A-Z0-9]*)(\<[SEP]+\>)(.*)(\<[SEP]+\>)//g;
 
-	#rename line to title
+	# rename line to title
 	$title = $line;
 	
-	# Setp 2, eliminate all text following these symbols
+	# Setp 2, eliminate these symbols and all text that follows
 	$title =~ s/(\[(.*))+//g;			#[
 	$title =~ s/(\((.*))+//g;			#(
 	$title =~ s/(\{(.*))+//g;			#{
@@ -86,26 +86,32 @@ while($line = <INFILE>) {
 	$title =~ s/\s*\bto\b//g;
 	$title =~ s/\s*\bwith\b//g;
 
-	#making a titles array where each index is a title
+	# additional filtered stop word
+	$title =~ s/\s*\byou\b//g;
+
+	# verify titles are preprocessed correctly
+	# print($title);
+
+	# making a titles array where each index is a title
 	@titles[numValid] = $title;
 
-	#splitting each title into words
+	# splitting each title into words
 	my @words = split ' ', $titles[numValid];
 
 	my $i = 0;
 
-	#use words - 1 so that the last word in a title is not included as a bigram with an empty string
+	# use words - 1 so that the last word in a title is not included as a bigram with an empty string
 	for($index=0; $index <= $#words - 1; $index++) {
 
-		#array to hold keys
+		# array to hold keys
     	@keys[i] = $words[$index];
 
-    	#array to hold values
+    	# array to hold values
     	@values[i] = $words[$index + 1];
 
-    	#print("key: @keys[i], value: @values[i]\n");
+    	# print("key: @keys[i], value: @values[i]\n");
 
-    	#building hash of ((key, value), count)
+    	# building hash of ((key, value), count)
     	for($j=0; $j <= $#keys; $j++) {
 			for ($k = 0; $k < scalar @keys; $k++) {
    				$hash{$keys[$k]}{$values[$k]} += 1;
@@ -116,14 +122,14 @@ while($line = <INFILE>) {
 	}
 }
 
-#print key : value = count
+# print key : value = count
 foreach my $key (sort keys %hash) {
    	while (my ($value, $count) = each %{$hash{$key}}) {
-    	#print "$key : $value = $count\n";
+    	# print "$key : $value = $count\n";
    	}
 }
 
-#print("\nThere are $numValid valid lines.\n");
+# print("\nThere are $numValid valid lines.\n");
 
 # Close the file handle
 close INFILE; 
@@ -147,35 +153,32 @@ while ($input ne "q"){
 	chomp($input);
 }
 
-#returns the word that most commonly follows the given argument
+# returns the word that most commonly follows the given argument
 sub mcw {
-	#setting $key to argument
+	# setting $key to argument
     my ($key) = @_;
 
-    #if argument is not a key
+    # if argument is not a key
     return "\n" unless exists $hash{$key};
 
     my $value = $hash{$key};
 
-    #returning value of key with highest count
+	# prints the unique words that follow key and the number of times the bigram occurs
+    # print(%$value);
+
+    # returning value of key with highest count
     return reduce { $value->{$a} > $value->{$b} ? $a : $b } keys %$value;
+
 }
 
-#Question 1
-#print mcw("happy");
-
-#Question 2
-#print mcw("sad");
-
-#Question 4
-#print mcw("computer");
-
+# returns a generated song title (<=20 words) based on the given input and the mcw to follow
 sub build_song_title {
 	my $numWords = 0;
 	my $songTitle = "";
 	my ($word) = @_;
 
 	while ($numWords < 20){
+		# building songTitle with argument and successive mcw() calls
 		$songTitle .= $word;
 		$songTitle .= " ";
 		$word = mcw($word);
