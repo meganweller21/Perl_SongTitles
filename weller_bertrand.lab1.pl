@@ -70,6 +70,22 @@ while($line = <INFILE>) {
 	# Step 5, convert to lowercase
 	$title = lc $title;
 
+	# Step 6, filter out stop words
+	$title =~ s/\s*\ba\b//g;
+	$title =~ s/\s*\ban\b//g;
+	$title =~ s/\s*\band\b//g;
+	$title =~ s/\s*\bby\b//g;
+	$title =~ s/\s*\bfor\b//g;
+	$title =~ s/\s*\bfrom\b//g;
+	$title =~ s/\s*\bin\b//g;
+	$title =~ s/\s*\bof\b//g;
+	$title =~ s/\s*\bon\b//g;
+	$title =~ s/\s*\bor\b//g;
+	$title =~ s/\s*\bout\b//g;
+	$title =~ s/\s*\bthe\b//g;
+	$title =~ s/\s*\bto\b//g;
+	$title =~ s/\s*\bwith\b//g;
+
 	#making a titles array where each index is a title
 	@titles[numValid] = $title;
 
@@ -107,7 +123,7 @@ foreach my $key (sort keys %hash) {
    	}
 }
 
-print("\nThere are $numValid valid lines.\n");
+#print("\nThere are $numValid valid lines.\n");
 
 # Close the file handle
 close INFILE; 
@@ -115,6 +131,21 @@ close INFILE;
 # Finished processing the song 
 # Data structure is populated with bigram counts.
 print "\nFile parsed. Bigram model built.\n\n";
+
+# User control loop
+print "Enter a word [Enter 'q' to quit]: ";
+$input = <STDIN>;
+chomp($input);
+print "\n";	
+while ($input ne "q"){
+	my $line = build_song_title($input);
+
+	print "\n", $line;
+	print "\nEnter a word [Enter 'q' to quit]: ";
+
+	$input = <STDIN>;
+	chomp($input);
+}
 
 #returns the word that most commonly follows the given argument
 sub mcw {
@@ -143,24 +174,13 @@ sub build_song_title {
 	my $numWords = 0;
 	my $songTitle = "";
 	my ($word) = @_;
-	#while ($numWords < 20 or $word eq "\n") {
-	#	$word = mcw($word);
-	#	$songTitle += $word;
-	#	$numWords += 1;
-	#}
+
+	while ($numWords < 20){
+		$songTitle .= $word;
+		$songTitle .= " ";
+		$word = mcw($word);
+		$numWords += 1;
+	}
+	
 	return $songTitle;
 }
-
-print build_song_title("all");
-
-# User control loop
-#print "Enter a word [Enter 'q' to quit]: ";
-#$input = <STDIN>;
-#chomp($input);
-#print "\n";	
-#while ($input ne "q"){
-	# Replace these lines with some useful code
-#	$input = 'q';
-#}
-
-# MORE OF YOUR CODE HERE....
